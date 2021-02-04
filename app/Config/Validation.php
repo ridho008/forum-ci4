@@ -87,4 +87,13 @@ class Validation
 			'rules' => 'if_exist|uploaded[avatar]|mime_in[avatar,image/jpg,image/jpeg,image/gif,image/png]max_size[avatar,1024]'
 		]
 	];
+
+	public $login = [
+		'username' => [
+			'rules' => 'required'
+		],
+		'password' => [
+			'rules' => 'required'
+		]
+	];
 }

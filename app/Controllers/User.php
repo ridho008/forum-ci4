@@ -10,6 +10,7 @@ class User extends BaseController
    }
 	public function index()
 	{
+      d(session()->get());
       $userModel = new \App\Models\UserModel();
       $user = $userModel->findAll();
 		return view('user/index', [
@@ -55,7 +56,12 @@ class User extends BaseController
          $this->session->setFlashdata('errors', $errors);
          return redirect()->to('/user/create');
       }
-      return view('user/create');
+      // jika role nya = admin
+      if($this->session->role === '0') {
+         return view('user/create');
+      } else {
+         return redirect()->to('/auth/register');
+      }
    }
 
    public function update()

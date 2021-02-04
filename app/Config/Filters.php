@@ -10,6 +10,8 @@ class Filters extends BaseConfig
 		'csrf'     => \CodeIgniter\Filters\CSRF::class,
 		'toolbar'  => \CodeIgniter\Filters\DebugToolbar::class,
 		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
+		'auth' => \App\Filters\AuthFilter::class,
+		'admin' => \App\Filters\AdminFilter::class,
 	];
 
 	// Always applied before every request
@@ -17,6 +19,8 @@ class Filters extends BaseConfig
 		'before' => [
 			//'honeypot'
 			// 'csrf',
+			// tidak boleh login, kecuali Controller auth yaitu login dan method create untuk menambahkan user
+			'auth' => ['except' => ['auth', 'auth/*', 'user','user/create']],
 		],
 		'after'  => [
 			'toolbar',
@@ -32,5 +36,12 @@ class Filters extends BaseConfig
 	// List filter aliases and any before/after uri patterns
 	// that they should run on, like:
 	//    'isLoggedIn' => ['before' => ['account/*', 'profiles/*']],
-	public $filters = [];
+	public $filters = [
+		// jika user mengakses controller user akan di redirect ke home
+		'admin' => [
+			'before' => [
+				'user', 'user/*'
+			]
+		]
+	];
 }

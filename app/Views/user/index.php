@@ -13,9 +13,10 @@
       </tr>
    </thead>
    <tbody>
-      <?php foreach($user as $key => $u) : ?>
+      <?php $no = 1; foreach($user as $key => $u) : ?>
+         <?php if($u->id != 1) : ?>
          <tr>
-            <td><?= $key + 1; ?></td>
+            <td><?= $no++; ?></td>
             <td>
                <a href="/user/view/<?= $u->id; ?>"><?= $u->username; ?></a></td>
             <td><?= $u->nama; ?></td>
@@ -25,6 +26,7 @@
                <a href="/user/delete/<?= $u->id ?>">Hapus</a>
             </td>
          </tr>
+      <?php endif; ?>
       <?php endforeach; ?>
    </tbody>
 </table>

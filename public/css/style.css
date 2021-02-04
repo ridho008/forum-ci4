@@ -238,6 +238,14 @@ tr:nth-child(even) {
    background-color: #f2f2f2;
 }
 
+.login-container {
+   width: 400px;
+   background-color: rgba(247, 248, 249, 1);
+   padding: 30px;
+   margin: 50px auto;
+   text-align: center;
+}
+
 .flex-container {
    display: flex;
 }
