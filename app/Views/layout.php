@@ -29,6 +29,7 @@
 				<button onclick="toggleMenu();">&#9776;</button>
 			</li>
 			<li class="menu-item hidden"><a href="#">Home</a></li>
+			<li class="menu-item hidden"><a href="/thread">Thread</a></li>
 			<li class="menu-item hidden"><a href="/user">User</a></li>
 			<li class="menu-item hidden"><?= $session->username; ?></li>
 			<li class="menu-item hidden"><a href="/auth/logout">Logout</a></li>
@@ -79,7 +80,7 @@
 </footer>
 
 <!-- SCRIPTS -->
-
+<?= $this->renderSection('script'); ?>
 <script>
 	function toggleMenu() {
 		var menuItems = document.getElementsByClassName('menu-item');

@@ -181,7 +181,7 @@ footer .copyrights {
    padding: 30px;
 }
 
-input, textarea {
+input, textarea, select {
    width: 100%;
    padding: 12px 20px;
    box-sizing: border-box;
@@ -244,6 +244,10 @@ tr:nth-child(even) {
    padding: 30px;
    margin: 50px auto;
    text-align: center;
+}
+
+.ck-editor__editable_inline {
+   min-height: 200px;
 }
 
 .flex-container {
