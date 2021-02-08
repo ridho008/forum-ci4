@@ -10,7 +10,6 @@ class User extends BaseController
    }
 	public function index()
 	{
-      d(session()->get());
       $userModel = new \App\Models\UserModel();
       $user = $userModel->findAll();
 		return view('user/index', [

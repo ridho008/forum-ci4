@@ -4,6 +4,7 @@ use \App\Models\ThreadModel;
 use \App\Models\KategoriModel;
 use \App\Models\UserModel;
 use \App\Models\ReplyModel;
+use \App\Models\RatingModel;
 
 class Thread extends BaseController
 {
@@ -14,6 +15,7 @@ class Thread extends BaseController
       $this->kategoriModel = new KategoriModel();
       $this->replyModel = new ReplyModel();
       $this->userModel = new UserModel();
+      $this->ratingModel = new RatingModel();
       $this->validation = \Config\Services::Validation();
       $this->session = session();
    }
@@ -35,7 +37,6 @@ class Thread extends BaseController
       $offset = ($page - 1) * $perPage;
       $threads = $this->threadModel->getJoin($limit, $offset, $keyword);
       $total = $this->threadModel->countThread($keyword);
-      d($total);
 		return view('thread/index', [
          'threads' => $threads,
          'page' => $page,
@@ -53,11 +54,19 @@ class Thread extends BaseController
       $kategori = $this->kategoriModel->find($thread->id_kategori);
       $user = $this->userModel->find($thread->created_by);
       $reply = $this->replyModel->getJoin($id);
+
+      $sum_rating = $this->ratingModel->sumRating($id);
+      $count_rating = $this->ratingModel->countRating($id);
+      $rating_result = 0;
+      if($count_rating) {
+         $rating_result = $sum_rating->star / $count_rating;
+      }
       return view('thread/view', [
          'thread' => $thread,
          'kategori' => $kategori,
          'user' => $user,
-         'reply' => $reply
+         'reply' => $reply,
+         'rating_result' => $rating_result
       ]);
    }
 
@@ -169,6 +178,28 @@ class Thread extends BaseController
       $this->threadModel->delete($id);
       $this->session->setFlashdata('success', 'Delete Thread Berhasil.');
       return redirect()->to('/thread');
+   }
+
+   public function rate()
+   {
+      if($this->request->getPost()) {
+         $data = $this->request->getPost();
+         $rating = new \App\Entities\Rating();
+
+         $check = $this->ratingModel->where('id_user', $data['id_user'])
+                                    ->where('id_thread', $data['id_thread'])
+                                    ->first();
+
+         if($check) {
+            $rating->id = $check->id;
+         }
+
+         $rating->fill($data);
+         $this->ratingModel->save($rating);
+         $segments = ['thread', 'view', $data['id_thread']];
+         $this->session->setFlashdata('success', 'Pemberian Rating Berhasil.');
+         return redirect()->to(base_url($segments));
+      }
    }
 
 	//--------------------------------------------------------------------
