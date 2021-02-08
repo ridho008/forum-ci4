@@ -3,6 +3,7 @@
 use \App\Models\ThreadModel;
 use \App\Models\KategoriModel;
 use \App\Models\UserModel;
+use \App\Models\ReplyModel;
 
 class Thread extends BaseController
 {
@@ -11,6 +12,7 @@ class Thread extends BaseController
       helper('form');
       $this->threadModel = new threadModel();
       $this->kategoriModel = new KategoriModel();
+      $this->replyModel = new ReplyModel();
       $this->userModel = new UserModel();
       $this->validation = \Config\Services::Validation();
       $this->session = session();
@@ -29,10 +31,12 @@ class Thread extends BaseController
       $thread = $this->threadModel->find($id);
       $kategori = $this->kategoriModel->find($thread->id_kategori);
       $user = $this->userModel->find($thread->created_by);
+      $reply = $this->replyModel->getJoin($id);
       return view('thread/view', [
          'thread' => $thread,
          'kategori' => $kategori,
          'user' => $user,
+         'reply' => $reply
       ]);
    }
 
