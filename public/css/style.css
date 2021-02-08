@@ -141,7 +141,7 @@ section svg {
 footer {
    background-color: rgba(221, 72, 20, .8);
    text-align: center;
-   position: fixed;
+   margin-top: 20px;
    left: 0;
    bottom: 0;
    width: 100%;
@@ -250,8 +250,49 @@ tr:nth-child(even) {
    min-height: 200px;
 }
 
+ul.pagination li {
+   display: inline;
+}
+
+ul.pagination li a {
+   background-color: #fff;
+   border: 0.1px solid #c0392b;
+   color: #c0392b;
+   padding: 12px 20px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 12px;
+   /*margin: 4px 2px;*/
+   transition-duration: 0.4s;
+   cursor: pointer;
+}
+
+ul.pagination li a:hover {
+   background-color: #c0392b;
+   color: #fff;
+}
+
+ul.pagination li.active a {
+   background-color: #c0392b;
+   border: 0.1px solid #c0392b;
+   color: #fff;
+   padding: 12px 20px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 12px;
+   transition-duration: 0.4s;
+}
+
 .flex-container {
    display: flex;
+}
+
+.form-inline {
+   display: flex;
+   /*flex-flow: wrap-reverse;*/
+   align-items: center;
 }
 
 @media (max-width: 559px) {

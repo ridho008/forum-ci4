@@ -1,7 +1,27 @@
 <?= $this->extend('layout'); ?>
 <?= $this->section('content'); ?>
+<?php 
+$keyword = [
+   'name' => 'keyword',
+   'value' => $keyword,
+   'placeholder' => 'Keyword...'
+];
+$submit = [
+   'name' => 'submit',
+   'value' => 'Cari',
+   'type' => 'submit'
+];
+?>
 <h1>Thread</h1>
 <a href="/thread/create" class="button">Tambah Thread</a>
+<?= form_open('/thread', ['class' => 'form-inline']); ?>
+   <div>
+      <?= form_input($keyword); ?>
+   </div>
+   <div>
+      <?= form_submit($submit); ?>
+   </div>
+<?= form_close(); ?>
 <table>
    <thead>
       <tr>
@@ -17,7 +37,7 @@
    <tbody>
       <?php $no = 1; foreach($threads as $key => $thread) : ?>
          <tr>
-            <td><?= $no++; ?></td>
+            <td><?= $offset + $key + 1; ?></td>
             <td>
                <a href="/thread/view/<?= $thread->id ?>"><?= $thread->judul; ?></a>
             </td>
@@ -33,4 +53,5 @@
       <?php endforeach; ?>
    </tbody>
 </table>
+<?= \Config\Services::pager()->makeLinks($page, $perPage, $total, 'custom_pagination'); ?>
 <?= $this->endSection(); ?>

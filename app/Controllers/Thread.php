@@ -19,9 +19,30 @@ class Thread extends BaseController
    }
 	public function index()
 	{
-      $threads = $this->threadModel->getJoin();
+      $page = 1;
+      $keyword = '';
+
+      if($this->request->getPost()) {
+         $keyword = $this->request->getPost('keyword');
+      }
+
+      if($this->request->getGet()) {
+         $page = $this->request->getGet('page');
+      }
+
+      $perPage = 10;
+      $limit = $perPage;
+      $offset = ($page - 1) * $perPage;
+      $threads = $this->threadModel->getJoin($limit, $offset, $keyword);
+      $total = $this->threadModel->countThread($keyword);
+      d($total);
 		return view('thread/index', [
-         'threads' => $threads
+         'threads' => $threads,
+         'page' => $page,
+         'perPage' => $perPage,
+         'total' => $total, 
+         'offset' => $offset,
+         'keyword' => $keyword
       ]);
 	}
 
