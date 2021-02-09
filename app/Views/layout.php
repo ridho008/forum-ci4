@@ -31,7 +31,9 @@
 			</li>
 			<li class="menu-item hidden"><a href="/">Home</a></li>
 			<li class="menu-item hidden"><a href="/thread">Thread</a></li>
+			<?php if($session->role == 0) : ?>
 			<li class="menu-item hidden"><a href="/user">User</a></li>
+			<?php endif; ?>
 			<li class="menu-item hidden"><?= $session->username; ?></li>
 			<li class="menu-item hidden"><a href="/auth/logout">Logout</a></li>
 		</ul>

@@ -27,6 +27,7 @@ $submit = [
       <tr>
          <th>No</th>
          <th>Judul</th>
+         <th>Rating</th>
          <th>Kategori</th>
          <th>Posted By</th>
          <?php if(session()->get('role') == 0) : ?>
@@ -40,6 +41,18 @@ $submit = [
             <td><?= $offset + $key + 1; ?></td>
             <td>
                <a href="/thread/view/<?= $thread->id ?>"><?= $thread->judul; ?></a>
+            </td>
+            <td>
+               <?php 
+               for($i = 0; $i < 5; $i++) {
+                  if(($i+1) <= $thread->rating) {
+                     echo '<span class="fa fa-star checked"></span>';
+                  } else {
+                     echo '<span class="fa fa-star"></span>';
+                  }
+               }
+               ?>
+               <small>dari <?= $thread->count_star ?> User</small>
             </td>
             <td><?= $thread->kategori; ?></td>
             <td><?= $thread->nama; ?></td>

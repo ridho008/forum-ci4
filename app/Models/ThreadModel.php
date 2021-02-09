@@ -13,9 +13,10 @@ class ThreadModel extends Model
    public function getJoin($limit, $offset, $keyword)
    {
       return $this->db->table("thread")
-      ->select("thread.id, thread.judul, kategori.kategori, user.nama")
+      ->select("thread.id, thread.judul, kategori.kategori, user.nama, view_rating.count_star, view_rating.rating")
       ->join("kategori", "thread.id_kategori = kategori.id", "left")
       ->join("user", "thread.created_by = user.id", "left")
+      ->join("view_rating", "thread.id = view_rating.id_thread", "left")
       ->like('thread.isi', $keyword)
       ->orLike('thread.judul', $keyword)
       ->get($limit, $offset)->getResult();
