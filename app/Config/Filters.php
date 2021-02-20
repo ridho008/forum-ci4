@@ -12,6 +12,7 @@ class Filters extends BaseConfig
 		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
 		'auth' => \App\Filters\AuthFilter::class,
 		'admin' => \App\Filters\AdminFilter::class,
+		'messages' => \App\Filters\MessagesFilter::class,
 	];
 
 	// Always applied before every request
@@ -40,7 +41,12 @@ class Filters extends BaseConfig
 		// jika user mengakses controller user akan di redirect ke home
 		'admin' => [
 			'before' => [
-				'user', 'user/*'
+				'user/index', 'user/view', 'user/update', 'user/delete'
+			]
+		],
+		'messages' => [
+			'before' => [
+				'messages/view/*'
 			]
 		]
 	];

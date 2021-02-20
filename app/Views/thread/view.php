@@ -33,7 +33,7 @@ $submit = [
          </div>
          <button id="btn-rating">Berikan Rating</button>
          <small>
-            Created By <?= $user->username ?> on <?= $kategori->kategori ?> at <?= $thread->created_at ?>
+            Created By <a href="/user/view/<?= $user->id ?>"><?= $user->username ?></a> on <?= $kategori->kategori ?> at <?= $thread->created_at ?>
          </small>
       </div>
       <div style="margin: auto;">

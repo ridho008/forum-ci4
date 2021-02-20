@@ -1,6 +1,7 @@
 <?= $this->extend('layout'); ?>
 <?= $this->section('content'); ?>
 <h1>Detail User <?= $user->username; ?></h1>
+<a href="/messages/create/<?= $user->id ?>">Kirim Pesan</a>
 <div class="flex-container">
    <div style="padding-top: 10px;">
       <img src="/uploads/<?= $user->avatar; ?>" width="300px">
