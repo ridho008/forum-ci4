@@ -39,6 +39,7 @@
 			<li class="menu-item hidden"><a href="/messages/inbox">Inbox(<?= $count_inbox ?>)</a></li>
 			<?php if($session->role == 0) : ?>
 			<li class="menu-item hidden"><a href="/user">User</a></li>
+			<li class="menu-item hidden"><a href="/dashboard">Dashboard</a></li>
 			<?php endif; ?>
 			<li class="menu-item hidden"><?= $session->username; ?></li>
 			<li class="menu-item hidden"><a href="/auth/logout">Logout</a></li>
